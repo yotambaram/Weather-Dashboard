@@ -4,7 +4,7 @@
 
 
 
-
+// input-city. ---> val() 
 //var apiID = c372c30b4cd58eec1774beddc78c6a25
 
 //var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
@@ -16,17 +16,18 @@
 
 
 
-// input-city. ---> val().trim(hi) 
 
-var coordsStr ='';
+
+
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentCity = '&q=London' // from input
 var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
 var coords = ""
-var queryURLuvIndex = ''
+
+var queryURLuvIndex = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=37.75&lon=-122.37' //+ coordsLat + coordsLon
 //console.log(queryURLuvIndex)
 
-console.log(queryURLuvIndex)
+
 
 
 function WeatherNow(linkAPI){
@@ -41,7 +42,7 @@ function WeatherNow(linkAPI){
     var splitDate = currentDa.split(',');
     var currentDate = splitDate[0]
     // if is the weatherURL adrees
-    if(linkAPI === weatherURL){
+    if(linkAPI = weatherURL){
         $.ajax(weatherObj).then(function(response){
             console.log(response)
             cityName = response.name
@@ -49,20 +50,17 @@ function WeatherNow(linkAPI){
             var currentTemp = response.main.temp
             var currentHumidity = response.main.humidity + '%'
             var currentWindSpeed = response.wind.speed
-            var coordLon = response.coord.lon
-            var coordLat = response.coord.lat
-            coordsStr = '&lat=' + coordLat + '&lon=' + coordLon
-            queryURLuvIndex = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + coordsStr //coordsStr 
-            console.log(queryURLuvIndex)
+            var coordsLon = '&lot=' + response.coord.lon
+            var coordsLat = '&lot=' + response.coord.lat
+            console.log(coordsLon, coordsLat)
             console.log('Temp = ' + currentTemp, 'Humidity = ' + currentHumidity, 'current WindSpeed = ' + currentWindSpeed)
-            WeatherNow(queryURLuvIndex)
         })
     // if is the weatherURL adrees
-    } else if(linkAPI === queryURLuvIndex){
-        console.log(queryURLuvIndex)
+    } else if(linkAPI = queryURLuvIndex){
+        console.log('fsdsd')
         $.ajax(weatherObj).then(function(response){
-
-           console.log('fsdfsd')
+           // console.log(response)
+           console.log('fsdfsdf')
             
             //console.log(coordsLon)
         })
@@ -74,5 +72,5 @@ function WeatherNow(linkAPI){
 }
 
 WeatherNow(weatherURL)
-
+WeatherNow(queryURLuvIndex)
 

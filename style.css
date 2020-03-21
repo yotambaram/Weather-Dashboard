@@ -13,3 +13,17 @@ header{
 .border{
     border: 1px solid black;
 }
+
+#currentwather{
+    margin: 0 0;
+    padding: 10px;
+}
+
+#current-wather-box{
+    
+
+}
+
+.listBtn{
+    width: 100%;
+}

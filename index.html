@@ -8,22 +8,44 @@
 
     <title>Weather Dashboard</title>
 </head>
-<body class='border'>
+<body>
     <header class='border'>
    
         <h1>Weather Dashboard</h1>
     </header>
-    <div class='container border' id='container-id'>
+    <div class='container' id='container-id'>
         <div class='row'>
-          <div class='col-4 border'>
-              <h3>Search for a city:</h3>
+          <div class='col-3 border'>
+              <h3 id = searchHeadline>Search for a city:</h3>
               <input id='input-city'/>
-     ``   </div>
-          <div class='col-8 border'>col</div>
+              <button id = 'search-button'>search button</button> 
+              <button class = 'listBtn' <!--- id will be the input--->city search list</button>
+          </div>
+          <div class='col-9 border'>
+            <div class='row'>
+                <div class='col-12' id='current-wather'>
+                    <div class="border" id='current-wather-box'>
+                        <h1 id = 'city-name-div'>city name + icon</h1>
+                        <p id = 'temp-div'>temp</p>
+                        <p id = 'wind-div'>wind</p>
+                        <p id = 'uv-div'>uv</p>   
+                    </div>        
+                </div>
+                <div class='col-12'>
+                    <div id = 'fortcast'>fortcast</div>        
+                </div>
+            </div>
+          </div>
         </div>
-    </div>
+    </div> 
+         
+  
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
