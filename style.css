@@ -1,0 +1,15 @@
+header{
+    text-align: center;
+}
+
+
+#container-id{
+    width: 100%;
+    margin: 0px auto;
+    max-width: 1920px;
+   
+}
+
+.border{
+    border: 1px solid black;
+}
