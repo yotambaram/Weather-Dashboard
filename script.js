@@ -75,8 +75,25 @@ function changeUI(){
 
 
 
+function newCityBtn(inp){
+    var listItem = $('<a>')
+    //var newCityBtnList = $('<button>')
+    listItem.attr('class', 'list-group-item list-group-item-action');
+    listItem.attr('id', 'list-messages-list'); //+(inp)
+    listItem.attr('data-toggle', 'list')
+    listItem.attr('role', 'tab')
+    listItem.attr('aria-controls', 'messages')
+    listItem.attr('href', '#list-messages')
+    listItem.text(inp)
+    //console.log(newCityBtnList);
+    //listItem.append(newCityBtnList)
+    $('#list-tab').prepend(listItem)
+}
+
+
+
+
 $('#search-button').on('click', function(){
-    console.log('clicked')
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity;
@@ -88,36 +105,32 @@ console.log(input)
 })
 
 
+$('.list-group-item-action').on('click', function(){
+    console.log('clicked')
+    /*
+    clickedCity = $('city-buttons-list').val().trim();
+    console.log(input)
+    GetWeatherData(weatherURL)
 
-function newCityBtn(inp){
-    var newCityBtnList = $('<bottun>')
-    newCityBtnList.attr('class', 'list-group-item list-group-item-action active');
-    newCityBtnList.attr('id', 'list-home-list'+(inp));
-    newCityBtnList.attr('data-toggle', 'list')
-    newCityBtnList.attr('href', '#')
-    newCityBtnList.attr('role', 'tab')
-    newCityBtnList.attr('aria-controls', 'home')
-    newCityBtnList.text(inp)
-    console.log(newCityBtnList);
-    $('#list-tab').append(newCityBtnList)
+    */
+
+})
+
+
+function setToLocalStorge(){
+// citys array
 }
+
+function setToLocalStorge(){
+   // get the last/first city
+
+}
+
 
 GetWeatherData(weatherURL)
 
 
 
 
-/*
-$('#search-button').keypress(function (enter) {
-    input = $('#city-input').val().trim()
-    currentCity = '&q='+input
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
-    console.log(weatherURL)
-
-console.log(input)
-   }); 
 
 
-
-
-*/

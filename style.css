@@ -24,6 +24,20 @@ header{
 
 }
 
+
+#city-input{
+    margin: 0 auto;
+}
+
 #list-tab{
     margin-top: 10px;
+}
+
+#search-box{
+    background-color: rgb(245, 245, 245);
+
+}
+
+.city-buttons-list{
+    width: 100%;
 }
