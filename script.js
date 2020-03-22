@@ -1,78 +1,91 @@
-// &AAID=c372c30b4cd58eec1774beddc78c6a25
-// Example of API call:
-// https://api.openweathermap.org/data/2.5/weather?q=London&APPID=c372c30b4cd58eec1774beddc78c6a25
-
-
-
-
-//var apiID = c372c30b4cd58eec1774beddc78c6a25
-
-//var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
-//var queryURL = 'http://dataservice.accuweather.com/locations/v1/cities/search';
-
-//var queryURL = 'https://pro.openweathermap.org/data/2.5/forecast/hourly?q=london&appid=c372c30b4cd58eec1774beddc78c6a25';
-
-
-
 
 
 // input-city. ---> val().trim(hi) 
+var cityObg = {}
 
-var coordsStr ='';
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
-var currentCity = '&q=London' // from input
+var currentCity = '&q=Seattle' // from input
 var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
-var coords = ""
-var queryURLuvIndex = ''
-//console.log(queryURLuvIndex)
-
-console.log(queryURLuvIndex)
 
 
-function WeatherNow(linkAPI){
-    // Generic Object
-    var weatherObj = {
-        url: linkAPI,
+https://api.openweathermap.org/data/2.5/weather?&appid=c372c30b4cd58eec1774beddc78c6a25&boston
+
+// Set the clock
+var currentTi = new Date();
+var currentDa = currentTi.toLocaleString()
+var splitDate = currentDa.split(',');
+var currentDate = splitDate[0]
+
+
+
+
+function GetWeatherData(QueryURL){
+    var weatherIcon, currentTemp, currentHumidity, currentWindSpeed, coordLon, coordLat, indexUvURL;
+
+    $.ajax({
+        url: QueryURL,
         method: "GET"
-        }
-    // Set the clock
-    var currentTi = new Date();
-    var currentDa = currentTi.toLocaleString()
-    var splitDate = currentDa.split(',');
-    var currentDate = splitDate[0]
-    // if is the weatherURL adrees
-    if(linkAPI === weatherURL){
-        $.ajax(weatherObj).then(function(response){
-            console.log(response)
-            cityName = response.name
-            var icon = response.weather[0].icon
-            var currentTemp = response.main.temp
-            var currentHumidity = response.main.humidity + '%'
-            var currentWindSpeed = response.wind.speed
-            var coordLon = response.coord.lon
-            var coordLat = response.coord.lat
-            coordsStr = '&lat=' + coordLat + '&lon=' + coordLon
-            queryURLuvIndex = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + coordsStr //coordsStr 
-            console.log(queryURLuvIndex)
-            console.log('Temp = ' + currentTemp, 'Humidity = ' + currentHumidity, 'current WindSpeed = ' + currentWindSpeed)
-            WeatherNow(queryURLuvIndex)
-        })
-    // if is the weatherURL adrees
-    } else if(linkAPI === queryURLuvIndex){
-        console.log(queryURLuvIndex)
-        $.ajax(weatherObj).then(function(response){
+        }).then(function(response){
 
-           console.log('fsdfsd')
-            
-            //console.log(coordsLon)
-        })
-        
-        
-    }
-    
-
+        cityName = response.name
+        cityObg.city = response.name
+        weatherIcon = response.weather[0].icon
+        cityObg.icon = weatherIcon
+        //currentTemp = response.main.temp
+        currentTemp = Math.floor((response.main.temp - 273.15) * 1.80 + 32) + '°F';
+        cityObg.temp = currentTemp;
+        currentHumidity = response.main.humidity + '%';
+        cityObg.humidity = currentHumidity;
+        currentWindSpeed = response.wind.speed;
+        cityObg.wind = currentWindSpeed
+        coordLon = response.coord.lon
+        coordLat = response.coord.lat
+        indexUvURL = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon;
+        cityObg.url = indexUvURL
+        getUvData(indexUvURL)
+        //changeUI('ddd')
+    })
 }
 
-WeatherNow(weatherURL)
+
+function getUvData(QueryURL){
+    $.ajax({
+        url: QueryURL,
+        method: "GET"
+        }).then(function(response){
+        var currentUV = response.value
+        cityObg.uv = currentUV
+        console.log(cityObg)
+        changeUI()
+    })
+}
+
+function changeUI(){
+    $('#city-name-div').text(cityObg.city + " (" + currentDate + ") " + " " + cityObg.icon); // <--ICON?
+    $('#temp-div').text('Temperature: ' + cityObg.temp);
+    $('#humidity-div').text('humidity: ' + cityObg.humidity);
+    $('#wind-div').text('wind: ' + cityObg.wind);
+    $('#uv-div').text('wind: ' + cityObg.uv);
+}
+
+
+
+
+$('#search-button').on('click', function(){
+    input = $('#input-city').val().trim()
+    currentCity = '&q='+input
+    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
+    console.log(weatherURL)
+    GetWeatherData(weatherURL)
+console.log(input)
+
+
+
+})
+
+
+
+GetWeatherData(weatherURL)
+
 
 
