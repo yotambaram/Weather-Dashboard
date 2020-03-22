@@ -31,6 +31,7 @@ header{
 
 #list-tab{
     margin-top: 10px;
+    width: 90%;
 }
 
 #search-box{
@@ -39,5 +40,9 @@ header{
 }
 
 .city-buttons-list{
+    width: 100%;
+}
+
+.list-group-item-action{
     width: 100%;
 }

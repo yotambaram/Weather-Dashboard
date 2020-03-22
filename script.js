@@ -2,10 +2,11 @@
 
 // input-city. ---> val().trim(hi) 
 var cityObg = {}
+var cityList = []
 
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
-var currentCity = '&q=Seattle' // from input
-var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
+//var currentCity = '&q=Seattle' // from input
+//var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
 
 
 https://api.openweathermap.org/data/2.5/weather?&appid=c372c30b4cd58eec1774beddc78c6a25&boston
@@ -26,7 +27,6 @@ function GetWeatherData(QueryURL){
         url: QueryURL,
         method: "GET"
         }).then(function(response){
-
         cityName = response.name
         cityObg.city = response.name
         weatherIcon = response.weather[0].icon
@@ -43,6 +43,7 @@ function GetWeatherData(QueryURL){
         indexUvURL = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon;
         cityObg.url = indexUvURL
         getUvData(indexUvURL)
+        setToLocalStorge(cityName)
         //changeUI('ddd')
     })
 }
@@ -55,7 +56,6 @@ function getUvData(QueryURL){
         }).then(function(response){
         var currentUV = response.value
         cityObg.uv = currentUV
-        console.log(cityObg)
         changeUI()
 
     })
@@ -63,6 +63,7 @@ function getUvData(QueryURL){
 
 function changeUI(){
     var currentcity = cityObg.city
+    
     $('#city-name-div').text(cityObg.city + " (" + currentDate + ") " + " " + cityObg.icon); // <--ICON?
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
@@ -74,12 +75,13 @@ function changeUI(){
 }
 
 
-
 function newCityBtn(inp){
-    var listItem = $('<a>')
+    if(!cityList.includes(inp)) {
+    cityList.push(cityName);
+    var listItem = $('<button>')
     //var newCityBtnList = $('<button>')
     listItem.attr('class', 'list-group-item list-group-item-action');
-    listItem.attr('id', 'list-messages-list'); //+(inp)
+    listItem.attr('id', inp); //+(inp)
     listItem.attr('data-toggle', 'list')
     listItem.attr('role', 'tab')
     listItem.attr('aria-controls', 'messages')
@@ -88,6 +90,11 @@ function newCityBtn(inp){
     //console.log(newCityBtnList);
     //listItem.append(newCityBtnList)
     $('#list-tab').prepend(listItem)
+
+
+
+    } //if the city is allready in the list, dont make new button 
+    
 }
 
 
@@ -97,37 +104,38 @@ $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity;
-    console.log(weatherURL);
-    
     GetWeatherData(weatherURL);
-console.log(input)
-
 })
 
 
-$('.list-group-item-action').on('click', function(){
-    console.log('clicked')
-    /*
-    clickedCity = $('city-buttons-list').val().trim();
-    console.log(input)
+$('#list-tab').on('click', function(){
+    clickCity = event.target.id
+   
+    console.log(clickCity)
+    thisCity = '&q='+ clickCity;
+    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity
     GetWeatherData(weatherURL)
 
-    */
-
 })
 
 
-function setToLocalStorge(){
+function setToLocalStorge(city){
+    localStorage.setItem('lastCity', city);
 // citys array
 }
 
-function setToLocalStorge(){
-   // get the last/first city
+function getFromLocalStorge(){
+    oldCity = localStorage.getItem('lastCity')
+    thisCity = '&q='+ oldCity;
+    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity
+    GetWeatherData(weatherURL)
+    console.log(oldCity)
 
+   // get the last/first city
 }
 
-
-GetWeatherData(weatherURL)
+getFromLocalStorge()
+//GetWeatherData(weatherURL)
 
 
 
