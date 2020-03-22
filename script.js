@@ -57,35 +57,67 @@ function getUvData(QueryURL){
         cityObg.uv = currentUV
         console.log(cityObg)
         changeUI()
+
     })
 }
 
 function changeUI(){
+    var currentcity = cityObg.city
     $('#city-name-div').text(cityObg.city + " (" + currentDate + ") " + " " + cityObg.icon); // <--ICON?
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
     $('#wind-div').text('wind: ' + cityObg.wind);
     $('#uv-div').text('wind: ' + cityObg.uv);
+    newCityBtn(currentcity)
+    //console.log(currentcity)
+
 }
 
 
 
-
 $('#search-button').on('click', function(){
-    input = $('#input-city').val().trim()
-    currentCity = '&q='+input
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
-    console.log(weatherURL)
-    GetWeatherData(weatherURL)
+    console.log('clicked')
+    input = $('#city-input').val().trim();
+    currentCity = '&q='+ input;
+    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity;
+    console.log(weatherURL);
+    
+    GetWeatherData(weatherURL);
 console.log(input)
-
-
 
 })
 
 
 
+function newCityBtn(inp){
+    var newCityBtnList = $('<bottun>')
+    newCityBtnList.attr('class', 'list-group-item list-group-item-action active');
+    newCityBtnList.attr('id', 'list-home-list'+(inp));
+    newCityBtnList.attr('data-toggle', 'list')
+    newCityBtnList.attr('href', '#')
+    newCityBtnList.attr('role', 'tab')
+    newCityBtnList.attr('aria-controls', 'home')
+    newCityBtnList.text(inp)
+    console.log(newCityBtnList);
+    $('#list-tab').append(newCityBtnList)
+}
+
 GetWeatherData(weatherURL)
 
 
 
+
+/*
+$('#search-button').keypress(function (enter) {
+    input = $('#city-input').val().trim()
+    currentCity = '&q='+input
+    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
+    console.log(weatherURL)
+
+console.log(input)
+   }); 
+
+
+
+
+*/

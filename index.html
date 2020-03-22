@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css"/>
 
     <title>Weather Dashboard</title>
@@ -15,11 +16,21 @@
     </header>
     <div class='container' id='container-id'>
         <div class='row'>
-          <div class='col-3 border'>
-              <h3 id = searchHeadline>Search for a city:</h3>
-              <input id='input-city'/>
-              <button id = 'search-button'>search button</button> 
-              <button class = 'list-button' <!--- id will be the input--->city search list</button>
+            <div class='col-3 border' id=searc>
+                <h3 id = searchHeadline>Search for a city:</h3>
+                    <div class='row'>
+                        <form>
+                            <input id='city-input'  class = 'col-8'/>
+                            <button id = 'search-button' class = 'col-3'>search </button>
+                        </form>
+                    </div>
+                    <div class='row'>
+                    <div class="col-12">
+                        <div class="list-group" id="list-tab" role="tablist">
+                           <!-- city button list -->
+                        </div>
+                    </div>
+                </div>
           </div>
           <div class='col-9 border'>
             <div class='row'>

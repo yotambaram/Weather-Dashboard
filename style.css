@@ -24,6 +24,6 @@ header{
 
 }
 
-.list-button{
-    width: 100%;
+#list-tab{
+    margin-top: 10px;
 }
