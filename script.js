@@ -1,5 +1,5 @@
 
-var fiveDaysObj = {};
+//var fiveDaysObj = {};
 var fiveDaysArr = [];
 var cityObg = {};
 var cityList = [];
@@ -42,31 +42,32 @@ function GetWeatherData(QueryURL){
 
 
 function fiveForecastData(city){
-    var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp;
+    var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp, hourT;
     fiveDaysURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
     $.ajax({
         url: fiveDaysURL,
         method: 'GET'
         }).then(function(response){
             dayList = response.list;
+            console.log(dayList)
             //change if before the fot loop
             for(var i = 0; i < dayList.length; i++){
                 dayWeather = dayList[i];
                 forecastAllDates = dayList[i].dt_txt;
                 hourChoose = forecastAllDates.split(' ');
+                var fiveDaysObj = {};
                 fiveDaysObj.date = hourChoose[0];
                 dayTemp = (dayWeather.main.temp).toString();
                 fiveDaysObj.temp = dayTemp
                 if(hourChoose[1] === '12:00:00') { 
-                  //  console.log(fiveDaysObj)
-                  // fiveDaysArr.splice(0, 0, fiveDaysObj);
                     fiveDaysArr.push(fiveDaysObj)
-                //   console.log(fiveDaysArr) 
-                changeForeCastUI()
- 
+                    changeForeCastUI()
+            
                 }  
-           }  
+               
+            }   
     })
+    
     
 }
 
@@ -96,11 +97,9 @@ function changeLocationTempUI(){
 
 function changeForeCastUI(){
     console.log(fiveDaysArr.length)
-    
     for(var i = 0; i < fiveDaysArr.length; i++){
         console.log(fiveDaysArr[i].date)
         console.log(fiveDaysArr[i].temp)
-
     $('#fortcast-' + i).text(fiveDaysArr[i].date + fiveDaysArr[i].temp)
     }
     
