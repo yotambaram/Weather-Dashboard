@@ -100,7 +100,7 @@ function changeForeCastUI(){
     for(var i = 0; i < fiveDaysArr.length; i++){
         console.log(fiveDaysArr[i].date)
         console.log(fiveDaysArr[i].temp)
-    $('#fortcast-' + i).text(fiveDaysArr[i].date + fiveDaysArr[i].temp)
+    $('#fortcast-' + i).text(fiveDaysArr[i].date + " " + fiveDaysArr[i].temp)
     }
     
 }
