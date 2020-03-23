@@ -1,23 +1,15 @@
 
-
-// input-city. ---> val().trim(hi) 
-var cityObg = {}
-var cityList = []
-
+var fiveDaysObj = {};
+var fiveDaysArr = [];
+var cityObg = {};
+var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
-//var currentCity = '&q=Seattle' // from input
-//var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity
-
-
-https://api.openweathermap.org/data/2.5/weather?&appid=c372c30b4cd58eec1774beddc78c6a25&boston
 
 // Set the clock
 var currentTi = new Date();
-var currentDa = currentTi.toLocaleString()
+var currentDa = currentTi.toLocaleString();
 var splitDate = currentDa.split(',');
-var currentDate = splitDate[0]
-
-
+var currentDate = splitDate[0];
 
 
 function GetWeatherData(QueryURL){
@@ -25,55 +17,94 @@ function GetWeatherData(QueryURL){
 
     $.ajax({
         url: QueryURL,
-        method: "GET"
+        method: 'GET'
         }).then(function(response){
-        cityName = response.name
-        cityObg.city = response.name
-        weatherIcon = response.weather[0].icon
-        cityObg.icon = weatherIcon
+        cityName = response.name;
+        cityObg.city = response.name;
+        weatherIcon = response.weather[0].icon;
+        cityObg.icon = weatherIcon;
         //currentTemp = response.main.temp
         currentTemp = Math.floor((response.main.temp - 273.15) * 1.80 + 32) + '°F';
         cityObg.temp = currentTemp;
         currentHumidity = response.main.humidity + '%';
         cityObg.humidity = currentHumidity;
         currentWindSpeed = response.wind.speed;
-        cityObg.wind = currentWindSpeed
-        coordLon = response.coord.lon
-        coordLat = response.coord.lat
-        indexUvURL = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon;
-        cityObg.url = indexUvURL
-        getUvData(indexUvURL)
-        setToLocalStorge(cityName)
-        //changeUI('ddd')
+        cityObg.wind = currentWindSpeed;
+        coordLon = response.coord.lon;
+        coordLat = response.coord.lat;
+        indexUvURL = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon + '&units=imperial';
+        cityObg.url = indexUvURL;
+        getUvData(indexUvURL);
+        setToLocalStorge(cityName);
+        fiveForecastData(cityName);
     })
+}
+
+
+function fiveForecastData(city){
+    var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp;
+    fiveDaysURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
+    $.ajax({
+        url: fiveDaysURL,
+        method: 'GET'
+        }).then(function(response){
+            dayList = response.list;
+            //change if before the fot loop
+            for(var i = 0; i < dayList.length; i++){
+                dayWeather = dayList[i];
+                forecastAllDates = dayList[i].dt_txt;
+                hourChoose = forecastAllDates.split(' ');
+                fiveDaysObj.date = hourChoose[0];
+                dayTemp = (dayWeather.main.temp).toString();
+                fiveDaysObj.temp = dayTemp
+                if(hourChoose[1] === '12:00:00') { 
+                  //  console.log(fiveDaysObj)
+                  // fiveDaysArr.splice(0, 0, fiveDaysObj);
+                    fiveDaysArr.push(fiveDaysObj)
+                //   console.log(fiveDaysArr) 
+                changeForeCastUI()
+ 
+                }  
+           }  
+    })
+    
 }
 
 
 function getUvData(QueryURL){
     $.ajax({
         url: QueryURL,
-        method: "GET"
+        method: 'GET'
         }).then(function(response){
         var currentUV = response.value
         cityObg.uv = currentUV
-        changeUI()
-
+        changeLocationTempUI()
     })
 }
 
-function changeUI(){
+
+function changeLocationTempUI(){
     var currentcity = cityObg.city
-    
-    $('#city-name-div').text(cityObg.city + " (" + currentDate + ") " + " " + cityObg.icon); // <--ICON?
+    $('#city-name-div').text(cityObg.city + ' (' + currentDate + ') ' + ' ' + cityObg.icon); // <--ICON?
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
     $('#wind-div').text('wind: ' + cityObg.wind);
     $('#uv-div').text('wind: ' + cityObg.uv);
     newCityBtn(currentcity)
-    //console.log(currentcity)
-
 }
 
+
+function changeForeCastUI(){
+    console.log(fiveDaysArr.length)
+    
+    for(var i = 0; i < fiveDaysArr.length; i++){
+        console.log(fiveDaysArr[i].date)
+        console.log(fiveDaysArr[i].temp)
+
+    $('#fortcast-' + i).text(fiveDaysArr[i].date + fiveDaysArr[i].temp)
+    }
+    
+}
 
 function newCityBtn(inp){
     if(!cityList.includes(inp)) {
@@ -90,53 +121,41 @@ function newCityBtn(inp){
     //console.log(newCityBtnList);
     //listItem.append(newCityBtnList)
     $('#list-tab').prepend(listItem)
-
-
-
-    } //if the city is allready in the list, dont make new button 
-    
+    } 
 }
 
 
+function setToLocalStorge(city){
+    localStorage.setItem('lastCity', city);
+}
+
+
+function getFromLocalStorge(){
+    oldCity = localStorage.getItem('lastCity')
+    thisCity = '&q='+ oldCity;
+    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
+    GetWeatherData(weatherURL)
+}
 
 
 $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity;
+    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity + '&units=imperial';
     GetWeatherData(weatherURL);
 })
 
 
 $('#list-tab').on('click', function(){
     clickCity = event.target.id
-   
     console.log(clickCity)
     thisCity = '&q='+ clickCity;
-    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity
+    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
     GetWeatherData(weatherURL)
-
 })
 
 
-function setToLocalStorge(city){
-    localStorage.setItem('lastCity', city);
-// citys array
-}
-
-function getFromLocalStorge(){
-    oldCity = localStorage.getItem('lastCity')
-    thisCity = '&q='+ oldCity;
-    var weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity
-    GetWeatherData(weatherURL)
-    console.log(oldCity)
-
-   // get the last/first city
-}
-
 getFromLocalStorge()
-//GetWeatherData(weatherURL)
-
 
 
 
