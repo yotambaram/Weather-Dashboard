@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 //var fiveDaysObj = {};
 //var fiveDaysArr = [];
