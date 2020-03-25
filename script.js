@@ -12,16 +12,15 @@ function setDate(){
     var currentTime, currentDa, splitDate, splitDate2
     currentTime = new Date();
     currentDa = currentTime.toLocaleString();
-    console.log(currentDa)
     splitDate = currentDa.split(',')[0]
     splitDate2 = splitDate.split('/')
-    console.log(splitDate)
     currentDate = splitDate//splitDate[1] + '.' + splitDate[0] + '.' + splitDate2[0];
 }
 
 
 
 function GetWeatherData(QueryURL){
+    
     var weatherIcon, currentTemp, currentHumidity, currentWindSpeed, coordLon, coordLat, indexUvURL;
     $.ajax({
         url: QueryURL,
@@ -74,7 +73,6 @@ function fiveForecastData(city){
                 fiveDaysObj.temp = dayTemp;
                 if(hourChoose[1] === '12:00:00') { 
                     fiveDaysArr.push(fiveDaysObj);
-                    console.log(fiveDaysArr)
                     if(fiveDaysArr.length === 5){
                         changeForeCastUI()
                     }     
@@ -85,6 +83,7 @@ function fiveForecastData(city){
 
 
 function getUvData(QueryURL){
+    
     $.ajax({
         url: QueryURL,
         method: 'GET'
@@ -139,7 +138,6 @@ function newCityBtn(inp){
     listItem.attr('aria-controls', 'messages')
     listItem.attr('href', '#list-messages')
     listItem.text(inp)
-    //console.log(newCityBtnList);
     //listItem.append(newCityBtnList)
     $('#list-tab').prepend(listItem)
     } 
@@ -153,14 +151,13 @@ function setToLocalStorge(city){
 
 function getFromLocalStorge(){
     oldCity = localStorage.getItem('lastCity')// || ''
-    console.log('oldCity:' + oldCity )
-    if(oldCity !== null){
-        thisCity = '&q='+ oldCity;
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
-    setDate()
-    GetWeatherData(weatherURL)
-    }    
-    console.log('test')
+    if(oldCity !== null)
+        {thisCity = '&q='+ oldCity;
+        weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
+        setDate()
+        GetWeatherData(weatherURL)
+    } else {
+    }
 }
 
 
@@ -170,13 +167,12 @@ $('#search-button').on('click', function(){
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity + '&units=imperial';
     setDate()
     GetWeatherData(weatherURL);
-    console.log(weatherURL)
+ 
 })
 
 
 $('#list-tab').on('click', function(){
     clickCity = event.target.id
-    console.log(clickCity)
     thisCity = '&q='+ clickCity;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
     setDate()
