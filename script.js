@@ -1,12 +1,13 @@
 
 //var fiveDaysObj = {};
-var fiveDaysArr = [];
+//var fiveDaysArr = [];
 var cityObg = {};
 var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentDate = ''
 $("#days-forecast").hide();
-// Set the clock
+
+// Set the date
 function setDate(){
     var currentTime, currentDa, splitDate, splitDate2
     currentTime = new Date();
@@ -44,11 +45,13 @@ function GetWeatherData(QueryURL){
         getUvData(indexUvURL);
         setToLocalStorge(cityName);
         fiveForecastData(cityName);
+        
     })
 }
 
 
 function fiveForecastData(city){
+    
     var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp, forecastIcon;
     fiveDaysURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
     $.ajax({
@@ -56,8 +59,10 @@ function fiveForecastData(city){
         method: 'GET'
         }).then(function(response){
             dayList = response.list;
-            //change if before the fot loop
+            fiveDaysArr = []
+            
             for(var i = 0; i < dayList.length; i++){
+                
                 dayWeather = dayList[i];
                 forecastAllDates = dayList[i].dt_txt;
                 hourChoose = forecastAllDates.split(' ');
@@ -70,11 +75,19 @@ function fiveForecastData(city){
                 fiveDaysObj.temp = dayTemp;
                 if(hourChoose[1] === '12:00:00') { 
                     fiveDaysArr.push(fiveDaysObj);
+                    console.log(fiveDaysArr)
+                    if(fiveDaysArr.length === 5){
+                        console.log(fiveDaysArr)
+                        
+                        changeForeCastUI();
+
+                    }
+                    
                     
             
                 }  
             } 
-            changeForeCastUI();  
+              
         })
 }
 
@@ -110,13 +123,13 @@ function changeForeCastUI(){
         icon = fiveDaysArr[i].icon;
         humidity = fiveDaysArr[i].humidity;
         temp = fiveDaysArr[i].temp + 'F'
-       var image = $('#logo-' + i)
-       var imageSrc = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
-       $('#logo-' + i).attr('src', imageSrc);
-       $('#date-' + i).text(NewDate);
-       $('#humidity-' + i).text('humidity: ' + humidity);
-       $('#temp-' + i).text('temp: ' + temp);
-       $("#days-forecast").show();
+        var image = $('#logo-' + i)
+        var imageSrc = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
+        $('#logo-' + i).attr('src', imageSrc);
+        $('#date-' + i).text(NewDate);
+        $('#humidity-' + i).text('humidity: ' + humidity);
+        $('#temp-' + i).text('temp: ' + temp);
+        $("#days-forecast").show();
       
  
     } 
@@ -148,10 +161,17 @@ function setToLocalStorge(city){
 
 
 function getFromLocalStorge(){
+    
     oldCity = localStorage.getItem('lastCity')
-    thisCity = '&q='+ oldCity;
+    if(oldCity !== ''){
+        thisCity = '&q='+ oldCity;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
+    setDate()
     GetWeatherData(weatherURL)
+    
+
+    }
+    
 }
 
 
@@ -159,7 +179,9 @@ $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity + '&units=imperial';
+    setDate()
     GetWeatherData(weatherURL);
+    console.log(weatherURL)
 })
 
 
@@ -168,7 +190,9 @@ $('#list-tab').on('click', function(){
     console.log(clickCity)
     thisCity = '&q='+ clickCity;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
+    setDate()
     GetWeatherData(weatherURL)
+    
 })
 
 // 
