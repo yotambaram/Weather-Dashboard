@@ -5,7 +5,7 @@ var cityObg = {};
 var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentDate = ''
-
+$("#days-forecast").hide();
 // Set the clock
 function setDate(){
     var currentTime, currentDa, splitDate, splitDate2
@@ -70,10 +70,11 @@ function fiveForecastData(city){
                 fiveDaysObj.temp = dayTemp;
                 if(hourChoose[1] === '12:00:00') { 
                     fiveDaysArr.push(fiveDaysObj);
-                    changeForeCastUI();
+                    
             
                 }  
-            }   
+            } 
+            changeForeCastUI();  
         })
 }
 
@@ -110,24 +111,17 @@ function changeForeCastUI(){
         humidity = fiveDaysArr[i].humidity;
         temp = fiveDaysArr[i].temp + 'F'
        var image = $('#logo-' + i)
-       var imageSrc = 'http://openweathermap.org/img/wn/10d@2x.png';
+       var imageSrc = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
        $('#logo-' + i).attr('src', imageSrc);
-       console.log(NewDate)
        $('#date-' + i).text(NewDate);
        $('#humidity-' + i).text('humidity: ' + humidity);
        $('#temp-' + i).text('temp: ' + temp);
-      //  test.append('#logo-0')
+       $("#days-forecast").show();
       
-    
-
-       // $('#fortcast-' + i).html(NewDate +  'Temp: '+ fiveDaysArr[i].temp +'<br>' + 'Humidity: ' + humidity)
+ 
     } 
 }
-/*
-ICON URL
-URL is
-http://openweathermap.org/img/wn/10d@2x.png
-*/
+
 
 function newCityBtn(inp){
     var listItem = $('<button>')
@@ -177,7 +171,7 @@ $('#list-tab').on('click', function(){
     GetWeatherData(weatherURL)
 })
 
-
+// 
 setDate()
 getFromLocalStorge()
 

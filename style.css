@@ -55,3 +55,8 @@ height: 200px;
 background-color: rgb(79, 131, 216);
 margin-right: 10px;
 }
+
+#days-forecast {
+width: 100%;
+
+}
