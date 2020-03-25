@@ -39,7 +39,7 @@ function GetWeatherData(QueryURL){
         cityObg.wind = currentWindSpeed;
         coordLon = response.coord.lon;
         coordLat = response.coord.lat;
-        indexUvURL = 'http://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon + '&units=imperial';
+        indexUvURL = 'https://api.openweathermap.org/data/2.5/uvi?' + apiKey + '&lat=' + coordLat + '&lon=' + coordLon + '&units=imperial';
         cityObg.url = indexUvURL;
         getUvData(indexUvURL);
         setToLocalStorge(cityName);
@@ -51,7 +51,7 @@ function GetWeatherData(QueryURL){
 
 function fiveForecastData(city){
     var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp, forecastIcon;
-    fiveDaysURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
+    fiveDaysURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
     $.ajax({
         url: fiveDaysURL,
         method: 'GET'
@@ -115,7 +115,7 @@ function changeForeCastUI(){
         humidity = fiveDaysArr[i].humidity;
         temp = fiveDaysArr[i].temp + 'F'
         var image = $('#logo-' + i)
-        var imageSrc = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
+        var imageSrc = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
         $('#logo-' + i).attr('src', imageSrc);
         $('#date-' + i).text(NewDate);
         $('#humidity-' + i).text('humidity: ' + humidity);
