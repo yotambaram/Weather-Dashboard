@@ -31,7 +31,7 @@ function GetWeatherData(QueryURL){
         weatherIcon = response.weather[0].icon;
         cityObg.icon = weatherIcon;
         //currentTemp = response.main.temp
-        currentTemp = Math.floor((response.main.temp - 273.15) * 1.80 + 32) + '°F';
+        currentTemp = response.main.temp + 'F'// Math.floor((response.main.temp - 273.15) * 1.80 + 32) + '°F';
         cityObg.temp = currentTemp;
         currentHumidity = response.main.humidity + '%';
         cityObg.humidity = currentHumidity;
@@ -105,15 +105,22 @@ function changeForeCastUI(){
     var splitedDate, NewDate, icon, humidity
     for(var i = 0; i < fiveDaysArr.length; i++){
         splitedDate = (fiveDaysArr[i].date).split('-');
-        NewDate = splitedDate[1] + '.' + splitedDate[2] + '.' + splitedDate[0] +'<br>'
-        icon = fiveDaysArr[i].icon + '<br>';
-        humidity = fiveDaysArr[i].humidity + '<br>';
-       // var test = $('#icon-' + i)
-       // test.attr('src', 'http://openweathermap.org/img/wn/012@2x.png');
+        NewDate = splitedDate[1] + '.' + splitedDate[2] + '.' + splitedDate[0];
+        icon = fiveDaysArr[i].icon;
+        humidity = fiveDaysArr[i].humidity;
+        temp = fiveDaysArr[i].temp + 'F'
+       var image = $('#logo-' + i)
+       var imageSrc = 'http://openweathermap.org/img/wn/10d@2x.png';
+       $('#logo-' + i).attr('src', imageSrc);
+       console.log(NewDate)
+       $('#date-' + i).text(NewDate);
+       $('#humidity-' + i).text('humidity: ' + humidity);
+       $('#temp-' + i).text('temp: ' + temp);
       //  test.append('#logo-0')
+      
     
 
-      //  $('#fortcast-' + i).html(NewDate +  'Temp: '+ fiveDaysArr[i].temp +'<br>' + 'Humidity: ' + humidity)
+       // $('#fortcast-' + i).html(NewDate +  'Temp: '+ fiveDaysArr[i].temp +'<br>' + 'Humidity: ' + humidity)
     } 
 }
 /*

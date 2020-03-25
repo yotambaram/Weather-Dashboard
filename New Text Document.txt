@@ -1,0 +1,14 @@
+   splitedDate = (fiveDaysArr[i].date).split('-');
+        NewDate = splitedDate[1] + '.' + splitedDate[2] + '.' + splitedDate[0] +'<br>'
+        icon = fiveDaysArr[i].icon + '<br>';
+        humidity = fiveDaysArr[i].humidity + '<br>';
+        var dayDiv = $('<div>')
+        var weatherIcon = $('<img>')
+        dayDiv.attr('class', 'col-2 fortcast')
+        dayDiv.attr('id', 'fortcast-' + i)
+        weatherIcon.attr('id', 'icon' + i)
+        weatherIcon.attr('src', 'http://openweathermap.org/img/wn/10d@2x.png')
+        weatherIcon.attr('alt', 'weatherIcon' + i)
+        dayDiv.html(NewDate +  'Temp: '+ fiveDaysArr[i].temp + weatherIcon + '<br>' + 'Humidity: ' + humidity)
+        dayDiv.append(weatherIcon)
+        $('#fortcast-div').append(dayDiv)
