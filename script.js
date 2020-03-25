@@ -1,5 +1,3 @@
-
-
 //var fiveDaysObj = {};
 //var fiveDaysArr = [];
 var cityObg = {};
@@ -21,7 +19,6 @@ function setDate(){
 
 
 function GetWeatherData(QueryURL){
-    
     var weatherIcon, currentTemp, currentHumidity, currentWindSpeed, coordLon, coordLat, indexUvURL;
     $.ajax({
         url: QueryURL,
