@@ -12,11 +12,13 @@ function setDate(){
     currentTime = new Date();
     currentDa = currentTime.toLocaleString();
     splitDate = currentDa.split(',')[0]
-    console.log(splitDate)
+    
     splitDate2 = splitDate.split('.')
     console.log(splitDate2)
 
-    currentDate = splitDate2[1] + '/' + splitDate2[0] + '/' + splitDate2[2];
+    currentDate = splitDate2[1] + '.' + splitDate2[0] + '.' + splitDate2[2];
+    console.log(currentDate)
+    
 }
 
 
@@ -100,7 +102,7 @@ function changeLocationTempUI(){
     var currentcity = cityObg.city
     var currentIcon = $('#current-icon')
     currentIcon.attr('src', 'https://openweathermap.org/img/wn/' + cityObg.icon + '@2x.png');
-    $('#city-name-div').text(cityObg.city + ' (' + currentDate + ')'); // <--ICON?
+    $('#city-name-div').text(cityObg.city + ', ' +  currentDate); // <--ICON?
 
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
@@ -157,29 +159,33 @@ function getFromLocalStorge(){
     if(oldCity !== null)
         {thisCity = '&q='+ oldCity;
         weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
-        setDate();
         GetWeatherData(weatherURL);
     } else {
     }
 }
 
 
+function clickFn(city){
+    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + city + '&units=imperial';
+    GetWeatherData(weatherURL);
+}
+
+
 $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity + '&units=imperial';
-    setDate();
-    GetWeatherData(weatherURL);
+    clickFn(currentCity)
+    
 })
 
 
 $('#list-tab').on('click', function(){
     clickCity = event.target.id;
     thisCity = '&q='+ clickCity;
-    weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
-    setDate();
-    GetWeatherData(weatherURL);
+    clickFn(thisCity)
+   
 })
+
 
  
 setDate()
