@@ -12,8 +12,11 @@ function setDate(){
     currentTime = new Date();
     currentDa = currentTime.toLocaleString();
     splitDate = currentDa.split(',')[0]
-    splitDate2 = splitDate.split('/')
-    currentDate = splitDate//splitDate[1] + '.' + splitDate[0] + '.' + splitDate2[0];
+    console.log(splitDate)
+    splitDate2 = splitDate.split('.')
+    console.log(splitDate2)
+
+    currentDate = splitDate2[1] + '/' + splitDate2[0] + '/' + splitDate2[2];
 }
 
 
@@ -95,49 +98,51 @@ function getUvData(QueryURL){
 
 function changeLocationTempUI(){
     var currentcity = cityObg.city
-    $('#city-name-div').text(cityObg.city + ' (' + currentDate + ') ' + ' ' + cityObg.icon); // <--ICON?
+    var currentIcon = $('#current-icon')
+    currentIcon.attr('src', 'https://openweathermap.org/img/wn/' + cityObg.icon + '@2x.png');
+    $('#city-name-div').text(cityObg.city + ' (' + currentDate + ')'); // <--ICON?
+
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
     $('#wind-div').text('wind: ' + cityObg.wind);
-    $('#uv-div').text('wind: ' + cityObg.uv);
-    newCityBtn(currentcity)
+    $('#uv-div').text('UV: ' + cityObg.uv);
+    newCityBtn(currentcity);
 }
 
 
 function changeForeCastUI(){
-    var splitedDate, NewDate, icon, humidity
+    var splitedDate, NewDate, icon, humidity;
     for(var i = 0; i < fiveDaysArr.length; i++){
         splitedDate = (fiveDaysArr[i].date).split('-');
         NewDate = splitedDate[1] + '.' + splitedDate[2] + '.' + splitedDate[0];
         icon = fiveDaysArr[i].icon;
         humidity = fiveDaysArr[i].humidity;
         temp = fiveDaysArr[i].temp + 'F'
-        var image = $('#logo-' + i)
+        var image = $('#logo-' + i);
         var imageSrc = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-        $('#logo-' + i).attr('src', imageSrc);
+        image.attr('src', imageSrc);
         $('#date-' + i).text(NewDate);
         $('#humidity-' + i).text('humidity: ' + humidity);
         $('#temp-' + i).text('temp: ' + temp);
         $("#days-forecast").show();
-      
     } 
 }
 
 
 function newCityBtn(inp){
-    var listItem = $('<button>')
+    var listItem = $('<button>');
     if(!cityList.includes(inp)) {
     cityList.push(cityName);
     //var newCityBtnList = $('<button>')
     listItem.attr('class', 'list-group-item list-group-item-action');
     listItem.attr('id', inp); //+(inp)
-    listItem.attr('data-toggle', 'list')
-    listItem.attr('role', 'tab')
-    listItem.attr('aria-controls', 'messages')
-    listItem.attr('href', '#list-messages')
-    listItem.text(inp)
+    listItem.attr('data-toggle', 'list');
+    listItem.attr('role', 'tab');
+    listItem.attr('aria-controls', 'messages');
+    listItem.attr('href', '#list-messages');
+    listItem.text(inp);
     //listItem.append(newCityBtnList)
-    $('#list-tab').prepend(listItem)
+    $('#list-tab').prepend(listItem);
     } 
 }
 
@@ -152,8 +157,8 @@ function getFromLocalStorge(){
     if(oldCity !== null)
         {thisCity = '&q='+ oldCity;
         weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
-        setDate()
-        GetWeatherData(weatherURL)
+        setDate();
+        GetWeatherData(weatherURL);
     } else {
     }
 }
@@ -163,18 +168,17 @@ $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + currentCity + '&units=imperial';
-    setDate()
+    setDate();
     GetWeatherData(weatherURL);
- 
 })
 
 
 $('#list-tab').on('click', function(){
-    clickCity = event.target.id
+    clickCity = event.target.id;
     thisCity = '&q='+ clickCity;
     weatherURL = 'https://api.openweathermap.org/data/2.5/weather?' + apiKey + thisCity + '&units=imperial';
-    setDate()
-    GetWeatherData(weatherURL)
+    setDate();
+    GetWeatherData(weatherURL);
 })
 
  

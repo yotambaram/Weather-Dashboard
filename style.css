@@ -19,10 +19,7 @@ header{
     padding: 10px;
 }
 
-#current-wather-box{
-    
 
-}
 
 
 #city-input{
@@ -36,6 +33,7 @@ header{
 
 #search-box{
     background-color: rgb(245, 245, 245);
+    min-height: 500px;
 
 }
 
@@ -51,6 +49,7 @@ header{
 
 .fortcast {
 width: 10%;
+padding: 5px;
 height: 200px;
 background-color: rgb(79, 131, 216);
 margin-left: 25px;
@@ -58,5 +57,10 @@ margin-left: 25px;
 
 #days-forecast {
 width: 100%;
+
+}
+
+#city-name-div{
+    margin: 3% 3% 3% 1%;
 
 }
