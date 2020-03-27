@@ -11,12 +11,8 @@ function setDate(){
     var currentTime, currentDa, splitDate, splitDate2
     currentTime = new Date();
     currentDa = currentTime.toLocaleString();
-    splitDate = currentDa.split(',')[0]
-    
-    splitDate2 = splitDate.split('.')
-    console.log(splitDate2)
-
-    currentDate = splitDate2[1] + '.' + splitDate2[0] + '.' + splitDate2[2];
+    console.log(currentDa)
+    currentDate = currentDa.split(',')[0]
     console.log(currentDate)
     
 }
