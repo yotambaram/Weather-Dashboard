@@ -53,7 +53,7 @@ function GetWeatherData(QueryURL){
 
 
 function fiveForecastData(city){
-    var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp, forecastIcon;
+    var dayList, dayWeather, forecastAllDates, hourChoose, dayTemp;
     fiveDaysURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey + '&units=imperial'// + '&cnt=5';
     $.ajax({
         url: fiveDaysURL,
@@ -61,9 +61,7 @@ function fiveForecastData(city){
         }).then(function(response){
             dayList = response.list;
             fiveDaysArr = []
-            
             for(var i = 0; i < dayList.length; i++){
-                
                 dayWeather = dayList[i];
                 forecastAllDates = dayList[i].dt_txt;
                 hourChoose = forecastAllDates.split(' ');
@@ -136,7 +134,7 @@ function newCityBtn(inp){
     if(!cityList.includes(inp)) {
     cityList.push(cityName);
     //var newCityBtnList = $('<button>')
-    listItem.attr('class', 'list-group-item list-group-item-action');
+    listItem.attr('class', 'list-group-item list-group-item-action list-button');
     listItem.attr('id', inp); //+(inp)
     listItem.attr('data-toggle', 'list');
     listItem.attr('role', 'tab');
@@ -174,6 +172,7 @@ function clickFn(city){
 $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
+    $('#city-input').val('');
     clickFn(currentCity)
     
 })

@@ -1,14 +1,21 @@
-header{
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+.header-style{
     text-align: center;
+    background-color: black;
+    color: white;
+    margin: 0 auto;
+    padding: 0.5% 0;
+}
+
+.white-background {
+    background-color: rgb(255, 255, 255);
+
 }
 
 
-#container-id{
-    width: 100%;
-    margin: 0px auto;
-    max-width: 1920px;
-   
-}
 
 .border{
     border: 1px solid black;
@@ -16,14 +23,31 @@ header{
 
 #currentwather{
     margin: 0 0;
-    padding: 10px;
+    padding: 50px;
+    
+}
+
+.location{
+    padding: 15px;
+}
+
+.center{
+    text-align: center;
+}
+
+#search-box{
+    background-color: rgb(245, 245, 245);
+    height: 100%;
+
+}
+
+#city-input{
+  
 }
 
 
-
-
-#city-input{
-    margin: 0 auto;
+#search-button{
+   
 }
 
 #list-tab{
@@ -31,11 +55,7 @@ header{
     width: 90%;
 }
 
-#search-box{
-    background-color: rgb(245, 245, 245);
-    min-height: 500px;
 
-}
 
 .city-buttons-list{
     width: 100%;
@@ -48,14 +68,15 @@ header{
 
 
 .fortcast {
-width: 10%;
-padding: 5px;
-height: 200px;
+text-align: center;
+height: 100%;
 background-color: rgb(79, 131, 216);
-margin-left: 25px;
+margin: 1%;
+
 }
 
 #days-forecast {
+margin: 0 auto;
 width: 100%;
 
 }
