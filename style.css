@@ -18,6 +18,12 @@ body {
 
 }
 
+.hide{
+    display: none;
+ 
+}
+
+
 #search-head-line{
     color: white;
     font-weight: bold;
@@ -51,6 +57,7 @@ body {
 #city-input{
   
 }
+
 
 
 #search-button{

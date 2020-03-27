@@ -99,9 +99,9 @@ function getUvData(QueryURL){
 function changeLocationTempUI(){
     var currentcity = cityObg.city
     var currentIcon = $('#current-icon')
+    $("#current-icon").removeClass('hide');
     currentIcon.attr('src', 'https://openweathermap.org/img/wn/' + cityObg.icon + '@2x.png');
     $('#city-name-div').text(cityObg.city + ', ' +  currentDate); // <--ICON?
-
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
     $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.15078)) + ' mph');
