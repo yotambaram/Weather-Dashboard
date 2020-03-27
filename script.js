@@ -104,8 +104,8 @@ function changeLocationTempUI(){
 
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
-    $('#wind-div').text('wind: ' + cityObg.wind);
-    $('#uv-div').text('UV: ' + cityObg.uv);
+    $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.15078)) + ' mph');
+    $('#uv-div').text('Ultraviolet (UV): ' + cityObg.uv);
     newCityBtn(currentcity);
 }
 
@@ -172,7 +172,10 @@ function clickFn(city){
 $('#search-button').on('click', function(){
     input = $('#city-input').val().trim();
     currentCity = '&q='+ input;
-    $('#city-input').val('');
+    if ($('#city-input').val() === ''){
+        $('#city-input').val('Enter a city name here')
+    } else{$('#city-input').val('');}
+    
     clickFn(currentCity)
     
 })
