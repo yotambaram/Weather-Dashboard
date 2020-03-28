@@ -5,6 +5,7 @@ var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentDate = ''
 $("#days-forecast").hide();
+$("#forecast-div").hide();
 
 // Set the date
 function setDate(){
@@ -96,6 +97,7 @@ function changeLocationTempUI(){
     var currentcity = cityObg.city
     var currentIcon = $('#current-icon')
     $("#current-icon").removeClass('hide');
+    $('#forecast-div').removeClass('hide');
     currentIcon.attr('src', 'https://openweathermap.org/img/wn/' + cityObg.icon + '@2x.png');
     $('#city-name-div').text(cityObg.city + ', ' +  currentDate); // <--ICON?
     $('#temp-div').text('Temperature: ' + cityObg.temp);
