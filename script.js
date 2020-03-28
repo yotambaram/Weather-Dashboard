@@ -5,7 +5,7 @@ var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentDate = ''
 $("#days-forecast").hide();
-$("#forecast-div").hide();
+
 
 // Set the date
 function setDate(){
@@ -173,17 +173,14 @@ $('#search-button').on('click', function(){
     if ($('#city-input').val() === ''){
         $('#city-input').val('Enter a city name here')
     } else{$('#city-input').val('');}
-    
     clickFn(currentCity)
-    
 })
 
 
 $('#list-tab').on('click', function(){
     clickCity = event.target.id;
     thisCity = '&q='+ clickCity;
-    clickFn(thisCity)
-   
+    clickFn(thisCity)  
 })
 
 
