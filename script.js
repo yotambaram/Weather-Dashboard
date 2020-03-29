@@ -4,7 +4,12 @@ var cityObg = {};
 var cityList = [];
 var apiKey = '&appid=c372c30b4cd58eec1774beddc78c6a25'
 var currentDate = ''
+matric = 'f'
 $("#days-forecast").hide();
+
+
+
+
 
 
 // Set the date
@@ -31,9 +36,9 @@ function GetWeatherData(QueryURL){
         weatherIcon = response.weather[0].icon;
         cityObg.icon = weatherIcon;
         //currentTemp = response.main.temp
-        currentTemp = response.main.temp + 'F'// Math.floor((response.main.temp - 273.15) * 1.80 + 32) + '°F';
+        currentTemp = response.main.temp;
         cityObg.temp = currentTemp;
-        currentHumidity = response.main.humidity + '%';
+        currentHumidity = response.main.humidity;
         cityObg.humidity = currentHumidity;
         currentWindSpeed = response.wind.speed;
         cityObg.wind = currentWindSpeed;
@@ -99,10 +104,16 @@ function changeLocationTempUI(){
     $("#current-icon").removeClass('hide');
     $('#forecast-div').removeClass('hide');
     currentIcon.attr('src', 'https://openweathermap.org/img/wn/' + cityObg.icon + '@2x.png');
-    $('#city-name-div').text(cityObg.city + ', ' +  currentDate); // <--ICON?
-    $('#temp-div').text('Temperature: ' + cityObg.temp);
-    $('#humidity-div').text('humidity: ' + cityObg.humidity);
-    $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.15078)) + ' mph');
+    $('#city-name-div').text(cityObg.city + ', ' +  currentDate);
+    if(matric === 'f'){
+        $('#temp-div').text('Temperature: ' + Math.floor(cityObg.temp) + '°F');
+        $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.15078)) + ' mph');
+    }  else {
+          $('#temp-div').text('Temperature: ' + Math.floor((cityObg.temp - 32) / 1.8) + '°C');
+          $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.85)) + ' kph');}
+
+    $('#humidity-div').text('humidity: ' + cityObg.humidity +'%');
+    
     $('#uv-div').text('UV Index: ' + cityObg.uv);
     newCityBtn(currentcity);
 }
@@ -115,13 +126,19 @@ function changeForeCastUI(){
         NewDate = splitedDate[1] + '.' + splitedDate[2] + '.' + splitedDate[0];
         icon = fiveDaysArr[i].icon;
         humidity = fiveDaysArr[i].humidity;
-        temp = fiveDaysArr[i].temp + 'F'
+        temp = fiveDaysArr[i].temp
         var image = $('#logo-' + i);
         var imageSrc = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
         image.attr('src', imageSrc);
         $('#date-' + i).text(NewDate);
         $('#humidity-' + i).text('humidity: ' + humidity);
-        $('#temp-' + i).text('temp: ' + temp);
+        if(matric === 'f') {
+            $('#temp-' + i).text('temp: ' + temp + '°F');
+        } else {
+            $('#temp-' + i).text('temp: ' + Math.floor((temp - 32) / 1.8) + '°C');
+
+        }
+        
         $("#days-forecast").show();
     } 
 }
@@ -193,7 +210,18 @@ $('#list-tab').on('click', function(){
     clickFn(thisCity)  
 })
 
+$('#matric').on('click', function(){
+    if(matric === 'f') {
+        matric = 'c'
+        console.log('fgsdfsd')
+        $('#matric').text('°C')
+    } else{
+        matric = 'f'
+        $('#matric').text('°F')
+    }
+    getFromLocalStorge()
 
+})
  
 setDate()
 getFromLocalStorge()

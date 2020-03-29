@@ -64,7 +64,12 @@ body {
   
 }
 
-
+#matric{
+    float: right;
+    background-color: rgb(172, 205, 243);
+    padding: 0 1.5%;
+    margin: 1%;
+}
 
 #search-button{
     background-color: rgb(79, 131, 216);
@@ -114,3 +119,13 @@ width: 92%;
     margin: 3% 3% 3% 1%;
 
 }
+
+ 
+.btn-circle.btn-sm { 
+    width: 22px; 
+    height: 22px; 
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 12px; 
+    text-align: center; 
+} 
