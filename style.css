@@ -24,6 +24,9 @@ body {
  
 }
 
+.weather{
+    margin-top: 1.5%;
+}
 
 #search-head-line{
     color: white;
@@ -75,7 +78,7 @@ body {
 
 
 #list-tab{
-    margin-top: 10px;
+    margin-top: 1.5%;
     width: 90%;
 }
 
@@ -85,7 +88,8 @@ body {
     background-color: rgb(79, 131, 216);
     margin: 1% 0% 1% 0;
     color: white;
-    font-weight: bold;
+    height: 90%;
+    padding: 4px;
 
 }
 
@@ -97,7 +101,7 @@ height: 100%;
 background-color: rgb(79, 131, 216);
 margin: 1%;
 color: white;
-font-weight: bold;
+
 }
 
 #days-forecast {

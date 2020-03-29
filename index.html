@@ -14,9 +14,9 @@
     <header class = 'header-style'>
         <h1 class = 'header-style'>Yotam's Weather Dashboard</h1>
     </header>
-    <container id = 'container'>
+    <container> 
         <div class='row size-smaller'>
-            <div class='col-12 col-md-6 col-lg-3' id='search-box'>
+            <div class='col-12 col-md-6 col-lg-3 weather' id='search-box'>
                 <br>
                 <h3 id = 'search-head-line' >Search for a city:</h3>
                     <div class='row size-smaller'>
@@ -34,11 +34,11 @@
                     </div>
             
         </div>
-        <div class='col-12 col-md-6 col-lg-8 white-background'>
+        <div class='col-12 col-md-6 col-lg-8 white-background weather'>
             <div class='row location size-smaller'>
                 <div class='col-12' id='current-wather'>
                     <div id='current-wather-box' class = 'row'>
-                        <div id = 'city-name-div' class = 'h3'>Welcome!</div><div></div><img id='current-icon' class = "hide" alt='current-icon'></div>
+                        <div id = 'city-name-div' class = 'h3'>Welcome!</div><img id='current-icon' class = "hide" alt='current-icon'></div>
                         <p id = 'temp-div'></p>
                         <p id = 'humidity-div'></p>
                         <p id = 'wind-div'></p>
@@ -46,33 +46,33 @@
                     </div>        
                 </div>
                 
-                    <div class='col-12 hide' id = 'forecast-div'><h3>5-Day forecast:</h3></div>
+                    <div class='col-12 hide' id = 'forecast-div'><h3>5-Days forecast:</h3></div>
                     <div class='row' id="days-forecast">
-                        <div class='forecast col-12 col-md-12 col-lg-2' id = 'forecase-0'>
+                        <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecase-0'>
                             <div id = 'date-0'></div>
                             <img id = logo-0 alt = "weather icon">
                             <div id = 'temp-0'></div>
                             <div id = 'humidity-0'></div>
                         </div>
-                        <div class='forecast col-12 col-md-12 col-lg-2' id = 'forecast-1'>  
+                        <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecast-1'>  
                             <div id = 'date-1'></div>
                             <img id = logo-1 alt = "weather icon">
                             <div id = 'temp-1'></div>
                             <div id = 'humidity-1'></div>
                         </div>
-                        <div class='forecast col-12 col-md-12 col-lg-2' id = 'forecast-2'>
+                        <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecast-2'>
                             <div id = 'date-2'></div>
                             <img id = logo-2 alt = "weather icon">
                             <div id = 'temp-2'></div>
                             <div id = 'humidity-2'></div>
                         </div>
-                        <div class='forecast col-12 col-md-12 col-lg-2' id = 'forecast-3'>  
+                        <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecast-3'>  
                             <div id = 'date-3'></div>
                             <img id = logo-3 alt = "weather icon">
                             <div id = 'temp-3'></div>
                             <div id = 'humidity-3'></div>
                         </div>
-                        <div class='forecast col-12 col-md-12 col-lg-2' id = 'forecast-4'>
+                        <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecast-4'>
                             <div id = 'date-4'></div>
                             <img id = logo-4 alt = "weather icon">
                             <div id = 'temp-4'></div>
@@ -80,9 +80,9 @@
                         </div>
                     </div>
                </div>
-            </div>
+            </container>
       
-    </container>
+        </div>
          
   
     

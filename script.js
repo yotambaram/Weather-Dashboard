@@ -103,7 +103,7 @@ function changeLocationTempUI(){
     $('#temp-div').text('Temperature: ' + cityObg.temp);
     $('#humidity-div').text('humidity: ' + cityObg.humidity);
     $('#wind-div').text('wind: ' + Math.floor((cityObg.wind * 1.15078)) + ' mph');
-    $('#uv-div').text('Ultraviolet (UV): ' + cityObg.uv);
+    $('#uv-div').text('UV Index: ' + cityObg.uv);
     newCityBtn(currentcity);
 }
 
@@ -175,6 +175,16 @@ $('#search-button').on('click', function(){
     } else{$('#city-input').val('');}
     clickFn(currentCity)
 })
+
+$(document).keypress(function(e) {
+    input = $('#city-input').val().trim();
+    if(e.which === 13 && input !== '') {
+        currentCity = '&q='+ input;
+        $('#city-input').val('')
+        clickFn(currentCity)
+    } else if(e.which === 13 && input === '') {
+        $('#city-input').val('Enter a city name here')}
+});
 
 
 $('#list-tab').on('click', function(){
