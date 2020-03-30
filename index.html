@@ -19,7 +19,7 @@
             <div class='col-12 col-md-6 col-lg-3 weather' id='search-box'>
                 <br>
                 <span id = 'search-head-line' >Search for a city:</span>
-                <div id='matric' type="button" class="btn btn-default btn-circle btn-sm"><span>°F</span></div>
+                <div id='matric' type="button" class="btn btn-default btn-circle btn-sm"><span>F</span></div>
                     <div class='row size-smaller'>
                         <html>
                         <input id='city-input'  class = 'col-8'/>
@@ -36,19 +36,23 @@
             
         </div>
         <div class='col-12 col-md-6 col-lg-8 white-background weather'>
-            <div class='row location size-smaller'>
+            <div class='row location'>
                 <div class='col-12' id='current-wather'>
                     <div id='current-wather-box' class = 'row'>
-                        <div id = 'city-name-div' class = 'h3'>Welcome! Search for City</div><img id='current-icon' class = "hide" alt='current-icon'></div>
-                        <p id = 'temp-div'></p>
-                        <p id = 'humidity-div'></p>
-                        <p id = 'wind-div'></p>
-                        <p id = 'uv-div'></p>   
+                        <div id = 'city-name-div' class = 'h3'>Welcome! Search for City</div>
+                        <div id='img-holder'>
+                            <img id='current-icon' class = "hide" alt='current-icon'>
+                        </div>
+                    </div>
+                    <p id = 'temp-div'></p>
+                    <p id = 'humidity-div'></p>
+                    <p id = 'wind-div'></p>
+                    <p id = 'uv-div'></p>   
                     </div>        
                 </div>
                 
                     <div class='col-12 hide' id = 'forecast-div'><h3>5-Days forecast:</h3></div>
-                    <div class='row' id="days-forecast">
+                    <div class='row  justify-content-between' id="days-forecast">
                         <div class='forecast col-12 col-md-12 col-lg-2 shadow' id = 'forecase-0'>
                             <div id = 'date-0'></div>
                             <img id = logo-0 alt = "weather icon">
