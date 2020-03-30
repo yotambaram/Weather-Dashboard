@@ -15,7 +15,7 @@
     we will get the method we chose automatically.
 
   Source of Data:
-   API: OpenWeather API](https://openweathermap.org/ap
+   API: OpenWeather (https://openweathermap.org/api)
 
    Use of technology:
  -  HTML5
