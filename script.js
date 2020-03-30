@@ -136,7 +136,7 @@ function changeForeCastUI(){
         $('#date-' + i).text(NewDate);
         $('#humidity-' + i).text('humidity: ' + humidity);
         if(matric === 'f') {
-            $('#temp-' + i).text('temp: ' + temp + '°F');
+            $('#temp-' + i).text('temp: ' + Math.floor(temp) + '°F');
         } else {
             $('#temp-' + i).text('temp: ' + Math.floor((temp - 32) / 1.8) + '°C');
         }
