@@ -91,8 +91,7 @@ function fiveForecastData(city){
 }
 
 // get the uv index data from api
-function getUvData(QueryURL){
-    
+function getUvData(QueryURL){  
     $.ajax({
         url: QueryURL,
         method: 'GET'
@@ -232,21 +231,18 @@ $('#city-input').on('mousedown', function(){
 
 // changing from fernite to celsius
 $('#matric').on('click', function(){
-    console.log(matric)
     if(matric === 'f') {
         matric = 'c'
         $('#matric').text('C')
         localStorage.setItem('lastMatric', matric);
         changeForeCastUI()
         changeLocationTempUI()
-        console.log('changed to c?' + matric)
     } else{
         matric = 'f'
         $('#matric').text('F')
         localStorage.setItem('lastMatric', matric);
         changeForeCastUI()
         changeLocationTempUI()
-        console.log('changed to f?' +matric)
     }
     
 })

@@ -9,7 +9,6 @@ body {
     text-align: center;
     background-color: rgb(79, 131, 216);
     color: white;
-    font-weight: bold;
     margin: 0 auto;
     padding: 0.5% 0;
     width: 100%;
@@ -31,7 +30,6 @@ body {
 
 #search-head-line{
     color: white;
-    font-weight: bold;
 
 }
 
@@ -75,7 +73,6 @@ body {
 #search-button{
     background-color: rgb(79, 131, 216);
     color: white;
-    font-weight: bold;
     border: none;
     
    
@@ -96,9 +93,12 @@ body {
     color: white;
     height: 90%;
     padding: 4px;
-
 }
 
+#current-wather{
+    background-color: rgb(79, 131, 216);
+    
+}
 
 
 .forecast{
@@ -121,13 +121,19 @@ width: 99%;
 
 }
 
+#matric-div{
+
+    float: right;
+    color: white;
+    padding-top: 1%;
+}
  
 .btn-circle.btn-sm { 
-    width: 26px; 
-    height: 26px; 
+    width: 24px; 
+    height: 24px; 
     padding: 6px 0px; 
     border-radius: 15px; 
-    font-size: 14px; 
+    font-size: 13px; 
     text-align: center; 
 } 
 

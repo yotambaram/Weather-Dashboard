@@ -19,7 +19,14 @@
             <div class='col-12 col-md-6 col-lg-3 weather' id='search-box'>
                 <br>
                 <span id = 'search-head-line' >Search for a city:</span>
-                <div id='matric' type="button" class="btn btn-default btn-circle btn-sm"><span>F</span></div>
+                
+                <div id='matric' type="button" class="btn btn-default btn-circle btn-sm">
+                    <span>F</span>
+                </div>
+                <div id='matric-div'>
+                    <span>Matric: </span>
+                </div>
+                
                     <div class='row size-smaller'>
                         <html>
                         <input id='city-input'  class = 'col-8'/>
@@ -33,11 +40,10 @@
                             </div>
                         </div>
                     </div>
-            
         </div>
         <div class='col-12 col-md-6 col-lg-8 white-background weather'>
             <div class='row location'>
-                <div class='col-12' id='current-wather'>
+                <div class='col-12 col-md-12 col-lg-5 border' id='current-wather'>
                     <div id='current-wather-box' class = 'row'>
                         <div id = 'city-name-div' class = 'h3'>Welcome! Search for City</div>
                         <div id='img-holder'>
@@ -48,8 +54,11 @@
                     <p id = 'humidity-div'></p>
                     <p id = 'wind-div'></p>
                     <p id = 'uv-div'></p>   
-                    </div>        
                 </div>
+                <div class='col-12 col-md-12 col-lg-6'>
+
+                </div>        
+            </div>
                 
                     <div class='col-12 hide' id = 'forecast-div'><h3>5-Days forecast:</h3></div>
                     <div class='row  justify-content-between' id="days-forecast">
@@ -85,9 +94,8 @@
                         </div>
                     </div>
                </div>
-            </container>
-      
         </div>
+    </container>
          
   
     
